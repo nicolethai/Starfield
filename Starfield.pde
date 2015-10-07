@@ -1,7 +1,7 @@
 public final static int SCREEN_SIZE = 500;
 public final static int NUM_PARTICLES = 10;
 
-NormalParticle[] particles = new NormalParticle[NUM_PARTICLES];
+Particle[] particles = new Particle[NUM_PARTICLES];
 
 void setup()
 {
@@ -11,6 +11,7 @@ void setup()
 	{
 		particles[i] = new NormalParticle();
 	}
+	particles[0] = new OddballParticle();
 }
 void draw()
 {
@@ -20,38 +21,59 @@ void draw()
 		particles[i].show();
 	}
 }
+
 class NormalParticle implements Particle
 {
-	int partColor;
-	double partX, partY, partTheta, partSpeed;
+	int someColor;
+	double x, y, theta, speed;
 	NormalParticle()
 	{
-		partColor = 255;
-		partX = SCREEN_SIZE/2;
-		partY = SCREEN_SIZE/2;
-		partTheta = Math.random()*(2*Math.PI);
-		partSpeed = Math.random()*10;
+		someColor = 255;
+		x = SCREEN_SIZE/2;
+		y = SCREEN_SIZE/2;
+		theta = Math.random()*(2*Math.PI);
+		speed = Math.random()*10;
 	}
 	public void move()
 	{
-		partX += Math.cos(partTheta*partSpeed);
-		partY += Math.sin(partTheta*partSpeed);
+		x += Math.cos(theta*speed);
+		y += Math.sin(theta*speed);
 	}
 	public void show()
 	{
-		fill(partColor);
-		ellipse((float)partX, (float)partY, 5, 5);
+		fill(someColor);
+		ellipse((float)x, (float)y, 5, 5);
 	}
 
 }
+
 interface Particle
 {
-	public void show();
 	public void move();
+	public void show();
 }
+
 class OddballParticle implements Particle //uses an interface
 {
-	//your code here
+	int someColor;
+	OddballParticle()
+	{
+		someColor = 125;
+		x = SCREEN_SIZE/2;
+		y = SCREEN_SIZE/2;
+		theta = Math.random()*(2*Math.PI);
+		speed = Math.random()*5;
+	}
+	public void move() 
+	{
+		x++;
+		y++;
+	};
+	public void show() 
+	{
+		fill(someColor);
+		ellipse((float)x, (float)y, 9, 9);
+	};
 }
 class JumboParticle implements Particle //uses inheritance
 {
