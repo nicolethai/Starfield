@@ -1,20 +1,21 @@
 public final static int SCREEN_SIZE = 500;
-public final static int NUM_PARTICLES = 10;
+public final static int NUM_PARTICLES = 50;
 
 Particle[] particles = new Particle[NUM_PARTICLES];
 
 void setup()
 {
-	background(0);
 	size(SCREEN_SIZE, SCREEN_SIZE);
 	for (int i = 0; i < NUM_PARTICLES; i++)
 	{
 		particles[i] = new NormalParticle();
 	}
 	particles[0] = new OddballParticle();
+	particles[1] = new JumboParticle();
 }
 void draw()
 {
+	background(0);
 	for (int i = 0; i < NUM_PARTICLES; i++)
 	{
 		particles[i].move();
@@ -22,17 +23,24 @@ void draw()
 	}
 }
 
+void mouseClicked()
+{
+	setup();
+}
+
 class NormalParticle implements Particle
 {
-	int someColor;
+	int r, g, b;
 	double x, y, theta, speed;
 	NormalParticle()
 	{
-		someColor = 255;
+		r = (int)(Math.random()*255);
+		g = (int)(Math.random()*255);
+		b = (int)(Math.random()*255);
 		x = SCREEN_SIZE/2;
 		y = SCREEN_SIZE/2;
 		theta = Math.random()*(2*Math.PI);
-		speed = Math.random()*10;
+		speed = Math.random()*1;
 	}
 	public void move()
 	{
@@ -41,7 +49,7 @@ class NormalParticle implements Particle
 	}
 	public void show()
 	{
-		fill(someColor);
+		fill(r, g, b);
 		ellipse((float)x, (float)y, 5, 5);
 	}
 
@@ -55,14 +63,17 @@ interface Particle
 
 class OddballParticle implements Particle //uses an interface
 {
-	int someColor;
+	int r, g, b;
+	double x, y, theta, speed;
 	OddballParticle()
 	{
-		someColor = 125;
+		r = (int)(Math.random()*255);
+		g = (int)(Math.random()*255);
+		b = (int)(Math.random()*255);
 		x = SCREEN_SIZE/2;
 		y = SCREEN_SIZE/2;
 		theta = Math.random()*(2*Math.PI);
-		speed = Math.random()*5;
+		speed = Math.random()*2;
 	}
 	public void move() 
 	{
@@ -71,12 +82,16 @@ class OddballParticle implements Particle //uses an interface
 	};
 	public void show() 
 	{
-		fill(someColor);
+		fill(r, g, b);
 		ellipse((float)x, (float)y, 9, 9);
 	};
 }
-class JumboParticle implements Particle //uses inheritance
-{
-	//your code here
-}
 
+class JumboParticle extends NormalParticle //uses inheritance
+{
+	public void show()
+	{
+		fill(r, g, b);
+		ellipse((float)x, (float)y, 15, 15);
+	}
+}
