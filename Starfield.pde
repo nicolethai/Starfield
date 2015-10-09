@@ -16,11 +16,17 @@ void setup()
 void draw()
 {
 	background(0);
+	for (int k = 0; k < 2; k++)
+	{
+	for (int j = 0; j < NUM_PARTICLES; j++)
+	{
 	for (int i = 0; i < NUM_PARTICLES; i++)
 	{
 		particles[i].move();
 		particles[i].show();
 	}
+	}
+}
 }
 
 void mouseClicked()
@@ -40,12 +46,19 @@ class NormalParticle implements Particle
 		x = SCREEN_SIZE/2;
 		y = SCREEN_SIZE/2;
 		theta = Math.random()*(2*Math.PI);
-		speed = Math.random()*1;
+		speed = Math.random()*5;
 	}
 	public void move()
 	{
 		x += Math.cos(theta*speed);
 		y += Math.sin(theta*speed);
+		if ((x < SCREEN_SIZE || x > SCREEN_SIZE) && 
+			(y < SCREEN_SIZE || y > SCREEN_SIZE))
+		{
+			System.out.println("Here!");
+			x -= 1;
+			y -= 1;
+		}
 	}
 	public void show()
 	{
@@ -73,7 +86,7 @@ class OddballParticle implements Particle //uses an interface
 		x = SCREEN_SIZE/2;
 		y = SCREEN_SIZE/2;
 		theta = Math.random()*(2*Math.PI);
-		speed = Math.random()*2;
+		speed = Math.random()*5;
 	}
 	public void move() 
 	{
