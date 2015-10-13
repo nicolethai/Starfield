@@ -27,6 +27,8 @@ void draw()
 	}
 	// }
 	// }
+
+
 }
 
 void mouseClicked()
@@ -52,18 +54,32 @@ class NormalParticle implements Particle
 	{
 		x += Math.cos(theta)*speed;
 		y += Math.sin(theta)*speed;
-		// if ((x < SCREEN_SIZE || x > SCREEN_SIZE) && 
-		// 	(y < SCREEN_SIZE || y > SCREEN_SIZE))
-		// {
-		// 	// System.out.println("Here!");
-		// 	x -= Math.cos(theta*speed);
-		// 	y -= Math.sin(theta*speed);
-		// }
+		if ((x < 0 && y > 0) /* && 
+			(y < SCREEN_SIZE || y > SCREEN_SIZE)*/)
+		{
+			// System.out.println("Here!");
+			x -= Math.cos(theta*speed);
+			y -= Math.sin(theta*speed);
+		}
+		// System.out.println(x);
+		// System.out.println(y);
 	}
 	public void show()
 	{
-		fill(r, g, b);
+		noStroke();
+		fill(r, g, b); 
 		ellipse((float)x, (float)y, 5, 5);
+	}
+	public void wrap()
+	{
+		if ((x < SCREEN_SIZE || x > SCREEN_SIZE)  && 
+			(y < SCREEN_SIZE || y > SCREEN_SIZE))
+		{
+			// System.out.println("Here!");
+			// x = SCREEN_SIZE/2;
+			// y = SCREEN_SIZE/2;
+			redraw();
+		}
 	}
 
 }
@@ -72,6 +88,7 @@ interface Particle
 {
 	public void move();
 	public void show();
+	public void wrap();
 }
 
 class OddballParticle implements Particle //uses an interface
@@ -115,9 +132,21 @@ class OddballParticle implements Particle //uses an interface
 	};
 	public void show() 
 	{
+		noStroke();
 		fill(r, g, b);
 		ellipse((float)x, (float)y, 9, 9);
 	};
+	public void wrap()
+	{
+		if ((x < 0 || x > 0)  && 
+			(y < SCREEN_SIZE || y > SCREEN_SIZE))
+		{
+			redraw();
+			// System.out.println("Here!");
+			// x -= Math.cos(theta*speed);
+			// y -= Math.sin(theta*speed);
+		}
+	}
 }
 
 class JumboParticle extends NormalParticle //uses inheritance
