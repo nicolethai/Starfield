@@ -1,5 +1,5 @@
 public final static int SCREEN_SIZE = 500;
-public final static int NUM_PARTICLES = 50;
+public final static int NUM_PARTICLES = 150;
 
 Particle[] particles = new Particle[NUM_PARTICLES];
 
@@ -16,17 +16,17 @@ void setup()
 void draw()
 {
 	background(0);
-	for (int k = 0; k < 2; k++)
-	{
-	for (int j = 0; j < NUM_PARTICLES; j++)
-	{
+	// for (int k = 0; k < 2; k++)
+	// {
+	// for (int j = 0; j < NUM_PARTICLES; j++)
+	// {
 	for (int i = 0; i < NUM_PARTICLES; i++)
 	{
 		particles[i].move();
 		particles[i].show();
 	}
-	}
-}
+	// }
+	// }
 }
 
 void mouseClicked()
@@ -46,19 +46,19 @@ class NormalParticle implements Particle
 		x = SCREEN_SIZE/2;
 		y = SCREEN_SIZE/2;
 		theta = Math.random()*(2*Math.PI);
-		speed = Math.random()*5;
+		speed = Math.random()*3;
 	}
 	public void move()
 	{
-		x += Math.cos(theta*speed);
-		y += Math.sin(theta*speed);
-		if ((x < SCREEN_SIZE || x > SCREEN_SIZE) && 
-			(y < SCREEN_SIZE || y > SCREEN_SIZE))
-		{
-			System.out.println("Here!");
-			x -= 1;
-			y -= 1;
-		}
+		x += Math.cos(theta)*speed;
+		y += Math.sin(theta)*speed;
+		// if ((x < SCREEN_SIZE || x > SCREEN_SIZE) && 
+		// 	(y < SCREEN_SIZE || y > SCREEN_SIZE))
+		// {
+		// 	// System.out.println("Here!");
+		// 	x -= Math.cos(theta*speed);
+		// 	y -= Math.sin(theta*speed);
+		// }
 	}
 	public void show()
 	{
@@ -86,12 +86,32 @@ class OddballParticle implements Particle //uses an interface
 		x = SCREEN_SIZE/2;
 		y = SCREEN_SIZE/2;
 		theta = Math.random()*(2*Math.PI);
-		speed = Math.random()*5;
+		speed = Math.random()*3;
 	}
 	public void move() 
 	{
-		x++;
-		y++;
+		int randDir = (int)(Math.random()*4);
+		if (randDir == 0)
+		{
+			x += (int)(Math.random()*5)-3;
+			y += (int)(Math.random()*5)-3;			
+		}
+		else if (randDir == 1)
+		{
+			x -= (int)(Math.random()*5)-3;
+			y += (int)(Math.random()*5)-3;
+		}
+		else if (randDir == 2)
+		{
+			x += (int)(Math.random()*5)-3;
+			y -= (int)(Math.random()*5)-3;
+		}
+		else if (randDir == 3)
+		{
+			x -= (int)(Math.random()*5)-3;
+			y -= (int)(Math.random()*5)-3;			
+		}
+
 	};
 	public void show() 
 	{
