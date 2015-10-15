@@ -2,6 +2,7 @@ public final static int SCREEN_SIZE = 500;
 public final static int NUM_PARTICLES = 150;
 
 Particle[] particles = new Particle[NUM_PARTICLES];
+Particle[] moreParticles = new Particle[NUM_PARTICLES];
 
 void setup()
 {
@@ -9,6 +10,7 @@ void setup()
 	for (int i = 0; i < NUM_PARTICLES; i++)
 	{
 		particles[i] = new NormalParticle();
+		moreParticles[i] = new NormalParticle();
 	}
 	particles[0] = new OddballParticle();
 	particles[1] = new JumboParticle();
@@ -16,17 +18,21 @@ void setup()
 void draw()
 {
 	background(0);
-	// for (int k = 0; k < 2; k++)
-	// {
-	// for (int j = 0; j < NUM_PARTICLES; j++)
-	// {
+	for (int k = 0; k < 2; k++)
+	{
+	for (int j = 0; j < NUM_PARTICLES; j++)
+	{
 	for (int i = 0; i < NUM_PARTICLES; i++)
 	{
 		particles[i].move();
 		particles[i].show();
+		particles[i].wrap();
+		moreParticles[i].move();
+		moreParticles[i].show();
+		moreParticles[i].wrap();
 	}
-	// }
-	// }
+	}
+	}
 
 
 }
@@ -54,15 +60,6 @@ class NormalParticle implements Particle
 	{
 		x += Math.cos(theta)*speed;
 		y += Math.sin(theta)*speed;
-		if ((x < 0 && y > 0) /* && 
-			(y < SCREEN_SIZE || y > SCREEN_SIZE)*/)
-		{
-			// System.out.println("Here!");
-			x -= Math.cos(theta*speed);
-			y -= Math.sin(theta*speed);
-		}
-		// System.out.println(x);
-		// System.out.println(y);
 	}
 	public void show()
 	{
@@ -72,14 +69,16 @@ class NormalParticle implements Particle
 	}
 	public void wrap()
 	{
-		if ((x < SCREEN_SIZE || x > SCREEN_SIZE)  && 
-			(y < SCREEN_SIZE || y > SCREEN_SIZE))
+		if ((x < 0 || x > SCREEN_SIZE)  && 
+			(y < 0 || y > SCREEN_SIZE))
 		{
-			// System.out.println("Here!");
-			// x = SCREEN_SIZE/2;
-			// y = SCREEN_SIZE/2;
-			redraw();
+			x = SCREEN_SIZE/2;
+			y = SCREEN_SIZE/2;
+			theta = Math.random()*(2*Math.PI);
+			speed = Math.random()*3;
 		}
+
+		move();
 	}
 
 }
@@ -138,14 +137,15 @@ class OddballParticle implements Particle //uses an interface
 	};
 	public void wrap()
 	{
-		if ((x < 0 || x > 0)  && 
-			(y < SCREEN_SIZE || y > SCREEN_SIZE))
+		if ((x < 0 || x > SCREEN_SIZE)  && 
+			(y < 0 || y > SCREEN_SIZE))
 		{
-			redraw();
-			// System.out.println("Here!");
-			// x -= Math.cos(theta*speed);
-			// y -= Math.sin(theta*speed);
+			x = SCREEN_SIZE/2;
+			y = SCREEN_SIZE/2;
+			theta = Math.random()*(2*Math.PI);
+			speed = Math.random()*3;		
 		}
+		move();
 	}
 }
 
