@@ -75,7 +75,7 @@ class NormalParticle implements Particle
 			x = SCREEN_SIZE/2;
 			y = SCREEN_SIZE/2;
 			theta = Math.random()*(2*Math.PI);
-			speed = Math.random()*3;
+			speed = Math.random()*2;
 		}
 		move();
 	}
@@ -142,7 +142,7 @@ class OddballParticle implements Particle //uses an interface
 			x = SCREEN_SIZE/2;
 			y = SCREEN_SIZE/2;
 			theta = Math.random()*(2*Math.PI);
-			speed = Math.random()*3;		
+			speed = Math.random()*2;		
 		}
 		move();
 	}
