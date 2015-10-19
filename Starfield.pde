@@ -13,7 +13,7 @@ void setup()
 		moreParticles[i] = new NormalParticle();
 	}
 	particles[0] = new OddballParticle();
-	particles[1] = new JumboParticle();
+	particles[1] = new JumboParticle();              
 }
 void draw()
 {
@@ -41,6 +41,7 @@ void mouseClicked()
 {
 	setup();
 }
+
 
 class NormalParticle implements Particle
 {
@@ -72,8 +73,8 @@ class NormalParticle implements Particle
 		if ((x < 0 || x > SCREEN_SIZE)  && 
 			(y < 0 || y > SCREEN_SIZE))
 		{
-			x = SCREEN_SIZE/2;
-			y = SCREEN_SIZE/2;
+			x -= Math.cos(theta)*speed;
+			y -= Math.sin(theta)*speed;
 			theta = Math.random()*(2*Math.PI);
 			speed = Math.random()*2;
 		}
