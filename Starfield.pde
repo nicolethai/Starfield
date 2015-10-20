@@ -6,9 +6,12 @@ Particle[] moreParticles = new Particle[NUM_PARTICLES];
 
 public int newX = SCREEN_SIZE/2, newY = SCREEN_SIZE/2;
 
+PImage popcorn;
+
 void setup()
 {
 	size(SCREEN_SIZE, SCREEN_SIZE);
+	popcorn = loadImage("popcorn.png");
 	for (int i = 0; i < NUM_PARTICLES; i++)
 	{
 		particles[i] = new NormalParticle();
@@ -20,7 +23,7 @@ void setup()
 void draw()
 {
 	background(0);
-
+	
 	for (int i = 0; i < NUM_PARTICLES; i++)
 	{
 		particles[i].move();
@@ -61,9 +64,10 @@ class NormalParticle implements Particle
 	}
 	public void show()
 	{
-		noStroke();
-		fill(r, g, b); 
-		ellipse((float)x, (float)y, 5, 5);
+		image(popcorn, (float)x, (float)y, 15, 15);
+		// noStroke();
+		// fill(r, g, b); 
+		// ellipse((float)x, (float)y, 5, 5);
 	}
 	public void wrap()
 	{
