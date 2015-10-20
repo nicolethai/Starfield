@@ -4,6 +4,8 @@ public final static int NUM_PARTICLES = 150;
 Particle[] particles = new Particle[NUM_PARTICLES];
 Particle[] moreParticles = new Particle[NUM_PARTICLES];
 
+public int newX = SCREEN_SIZE/2, newY = SCREEN_SIZE/2;
+
 void setup()
 {
 	size(SCREEN_SIZE, SCREEN_SIZE);
@@ -39,7 +41,9 @@ void draw()
 
 void mouseClicked()
 {
-	setup();
+	// setup();
+	newX = mouseX;
+	newY = mouseY;
 }
 
 
@@ -73,11 +77,15 @@ class NormalParticle implements Particle
 		if ((x < 0 || x > SCREEN_SIZE)  && 
 			(y < 0 || y > SCREEN_SIZE))
 		{
-			x -= Math.cos(theta)*speed;
+			x = newX;
+			y = newY;
+			theta = Math.random()*(2*Math.PI);
+			speed = Math.random()*2;
+/*			x -= Math.cos(theta)*speed;
 			y -= Math.sin(theta)*speed;
 			theta = Math.random()*(2*Math.PI);
 			speed = Math.random()*2;
-		}
+*/		}
 		move();
 	}
 
@@ -140,13 +148,13 @@ class OddballParticle implements Particle //uses an interface
 		if ((x < 0 || x > SCREEN_SIZE)  && 
 			(y < 0 || y > SCREEN_SIZE))
 		{
-			x = SCREEN_SIZE/2;
-			y = SCREEN_SIZE/2;
+			x = newX;
+			y = newY;
 			theta = Math.random()*(2*Math.PI);
 			speed = Math.random()*2;		
 		}
 		move();
-	}
+	} 
 }
 
 class JumboParticle extends NormalParticle //uses inheritance
