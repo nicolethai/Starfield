@@ -20,10 +20,7 @@ void setup()
 void draw()
 {
 	background(0);
-	// for (int k = 0; k < 2; k++)
-	// {
-	// for (int j = 0; j < NUM_PARTICLES; j++)
-	// {
+
 	for (int i = 0; i < NUM_PARTICLES; i++)
 	{
 		particles[i].move();
@@ -33,10 +30,6 @@ void draw()
 		moreParticles[i].show();
 		moreParticles[i].wrap();
 	}
-	// }
-	// }
-
-
 }
 
 void mouseClicked()
@@ -81,11 +74,7 @@ class NormalParticle implements Particle
 			y = newY;
 			theta = Math.random()*(2*Math.PI);
 			speed = Math.random()*2;
-/*			x -= Math.cos(theta)*speed;
-			y -= Math.sin(theta)*speed;
-			theta = Math.random()*(2*Math.PI);
-			speed = Math.random()*2;
-*/		}
+		}
 		move();
 	}
 
@@ -166,9 +155,12 @@ class JumboParticle extends NormalParticle //uses inheritance
 	}
 }
 
+
+/*
 void user()
 {
 	noStroke();
 	fill(255, 0, 0);
 	// triangle
 }
+*/
