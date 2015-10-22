@@ -1,17 +1,18 @@
 public final static int SCREEN_SIZE = 500;
-public final static int NUM_PARTICLES = 150;
+public final static int NUM_PARTICLES = 75;
 
 Particle[] particles = new Particle[NUM_PARTICLES];
 Particle[] moreParticles = new Particle[NUM_PARTICLES];
 
 public int newX = SCREEN_SIZE/2, newY = SCREEN_SIZE/2;
 
-PImage popcorn;
+PImage popcorn, soda;
 
 void setup()
 {
 	size(SCREEN_SIZE, SCREEN_SIZE);
 	popcorn = loadImage("popcorn.png");
+	soda = loadImage("soda.png");
 	for (int i = 0; i < NUM_PARTICLES; i++)
 	{
 		particles[i] = new NormalParticle();
@@ -22,7 +23,7 @@ void setup()
 }
 void draw()
 {
-	background(0);
+	background(255, 0, 0);
 	
 	for (int i = 0; i < NUM_PARTICLES; i++)
 	{
@@ -45,13 +46,14 @@ void mouseClicked()
 
 class NormalParticle implements Particle
 {
-	int r, g, b;
+	int r, g, b, size;
 	double x, y, theta, speed;
 	NormalParticle()
 	{
 		r = (int)(Math.random()*255);
 		g = (int)(Math.random()*255);
 		b = (int)(Math.random()*255);
+		size = (int)((Math.random()*50)+20);
 		x = SCREEN_SIZE/2;
 		y = SCREEN_SIZE/2;
 		theta = Math.random()*(2*Math.PI);
@@ -64,10 +66,7 @@ class NormalParticle implements Particle
 	}
 	public void show()
 	{
-		image(popcorn, (float)x, (float)y, 15, 15);
-		// noStroke();
-		// fill(r, g, b); 
-		// ellipse((float)x, (float)y, 5, 5);
+		image(popcorn, (float)x, (float)y, size, size);
 	}
 	public void wrap()
 	{
@@ -132,9 +131,7 @@ class OddballParticle implements Particle //uses an interface
 	};
 	public void show() 
 	{
-		noStroke();
-		fill(r, g, b);
-		ellipse((float)x, (float)y, 9, 9);
+		image(soda, (float)x, (float)y, 30, 60);
 	};
 	public void wrap()
 	{
@@ -154,17 +151,6 @@ class JumboParticle extends NormalParticle //uses inheritance
 {
 	public void show()
 	{
-		fill(r, g, b);
-		ellipse((float)x, (float)y, 15, 15);
+		image(popcorn, (float)x, (float)y, 100, 100);
 	}
 }
-
-
-/*
-void user()
-{
-	noStroke();
-	fill(255, 0, 0);
-	// triangle
-}
-*/
