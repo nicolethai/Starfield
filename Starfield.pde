@@ -23,7 +23,7 @@ void setup()
 }
 void draw()
 {
-	background(0);
+	background(255);
 	
 	for (int i = 0; i < NUM_PARTICLES; i++)
 	{
