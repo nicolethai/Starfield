@@ -4,13 +4,13 @@ public final static int NUM_PARTICLES = 125;
 Particle[] particles = new Particle[NUM_PARTICLES];
 Particle[] moreParticles = new Particle[NUM_PARTICLES];
 
-public int newX = SCREEN_SIZE/2, newY = (SCREEN_SIZE-50)/2;
+public int newX = SCREEN_SIZE/2, newY = (SCREEN_SIZE-100)/2;
 
 PImage popcorn, soda;
 
 void setup()
 {
-	size(SCREEN_SIZE, (SCREEN_SIZE-50));
+	size(SCREEN_SIZE, (SCREEN_SIZE-100));
 	popcorn = loadImage("popcorn.png");
 	soda = loadImage("soda.png");
 	for (int i = 0; i < NUM_PARTICLES; i++)
@@ -55,7 +55,7 @@ class NormalParticle implements Particle
 		b = (int)(Math.random()*255);
 		size = (int)((Math.random()*50)+20);
 		x = SCREEN_SIZE/2;
-		y = (SCREEN_SIZE-50)/2;
+		y = (SCREEN_SIZE-100)/2;
 		theta = Math.random()*(2*Math.PI);
 		speed = Math.random()*3;
 	}
@@ -71,7 +71,7 @@ class NormalParticle implements Particle
 	public void wrap()
 	{
 		if ((x < 0 || x > SCREEN_SIZE)  && 
-			(y < 0 || y > (SCREEN_SIZE-50)))
+			(y < 0 || y > (SCREEN_SIZE-100)))
 		{
 			x = newX;
 			y = newY;
@@ -100,7 +100,7 @@ class OddballParticle implements Particle //uses an interface
 		g = (int)(Math.random()*255);
 		b = (int)(Math.random()*255);
 		x = SCREEN_SIZE/2;
-		y = (SCREEN_SIZE-50)/2;
+		y = (SCREEN_SIZE-100)/2;
 		theta = Math.random()*(2*Math.PI);
 		speed = Math.random()*3;
 	}
@@ -136,7 +136,7 @@ class OddballParticle implements Particle //uses an interface
 	public void wrap()
 	{
 		if ((x < 0 || x > SCREEN_SIZE)  && 
-			(y < 0 || y > (SCREEN_SIZE-50)))
+			(y < 0 || y > (SCREEN_SIZE-100)))
 		{
 			x = newX;
 			y = newY;
